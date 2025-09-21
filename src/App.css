@@ -1,38 +1,54 @@
 .App {
-  text-align: center;
+  background-color: var(--background);
+  direction: rtl;
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media (max-width: 768px) {
+  .App {
+    overflow-x: hidden;
+    /* Only hide horizontal overflow */
+    overflow-y: visible;
+    /* Allow vertical scrolling */
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
+  flex: 1;
+  max-width: 1600px;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(255, 255, 255, 0) 100%);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  overflow: visible;
+  /* Ensure container content can overflow */
+}
+
+/* 404 Not Found page */
+.not-found {
+  text-align: center;
+  padding: 5rem 2rem;
+  font-size: 2rem;
+  color: var(--text);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 60vh;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+@media (max-width: 768px) {
+  .container {
+    padding: 40px 20px;
+    width: 100%;
+    overflow-x: auto;
+    /* Allow horizontal scrolling in container */
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling on iOS */
   }
 }
