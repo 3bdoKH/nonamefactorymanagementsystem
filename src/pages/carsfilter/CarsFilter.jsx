@@ -665,7 +665,7 @@ const CarsFilter = () => {
                                             </td>
                                             <td colSpan="2">المصروفات</td>
                                             <td colSpan="2">
-                                                {weeklyData.net_revenue}
+                                                {weeklyData.net_expenses}
                                             </td>
                                             <td colSpan="2"> اجمالي الايرادات الاضافية</td>
                                             <td colSpan="3">
