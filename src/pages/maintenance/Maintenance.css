@@ -1,0 +1,515 @@
+.maintenance-page {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100%;
+  direction: rtl;
+  gap: 2rem;
+}
+
+.filters-container {
+  background-color: var(--dark-background);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filter-item {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filter-item label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.filter-item select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--text);
+  background-color: #FFFFFF;
+}
+
+.maintenance-calendar {
+  background-color: var(--dark-background);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 2rem;
+}
+
+.maintenance-calendar h2 {
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.calendar-table-container {
+  overflow-x: auto;
+}
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  direction: rtl;
+}
+
+.calendar-table th {
+  background-color: var(--accent);
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.calendar-table td {
+  padding: 8px;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.calendar-table tr:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.calendar-table tr.editing-row {
+  background-color: rgba(59, 130, 246, 0.08);
+}
+
+.calendar-table tr.has-data-row {
+  background-color: rgba(16, 185, 129, 0.05);
+}
+
+.calendar-table input {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  text-align: center;
+  direction: ltr;
+}
+
+.calendar-table input[type="number"] {
+  width: 80px;
+}
+
+.calendar-table input[type="text"] {
+  width: 150px;
+}
+
+.total-column {
+  font-weight: bold;
+  color: var(--accent);
+  direction: ltr;
+}
+
+.save-btn {
+  background-color: #10B981;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.save-btn:hover {
+  background-color: #059669;
+}
+
+.cancel-btn {
+  background-color: #6B7280;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.cancel-btn:hover {
+  background-color: #4B5563;
+}
+
+.edit-btn {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.edit-btn:hover {
+  background-color: #2563EB;
+}
+
+.cars-list.maintenance-list {
+  background-color: var(--dark-background);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.maintenance-list h2 {
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+}
+
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.report-header h2 {
+  margin-bottom: 0.5rem;
+}
+
+.car-model-print {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.print-date {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0 0;
+  font-style: italic;
+}
+
+.print-only {
+  display: none;
+}
+
+.print-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.print-btn:hover {
+  background-color: #2563EB;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.print-btn:active {
+  transform: translateY(0);
+}
+
+.print-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.summary-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 2rem;
+}
+
+.summary-box {
+  flex: 1;
+  min-width: 300px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.summary-box h3 {
+  color: var(--text);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.summary-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.summary-row.total {
+  font-weight: bold;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+  border-bottom: none;
+  color: var(--accent);
+}
+
+.loading-indicator {
+  text-align: center;
+  padding: 1rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .maintenance-page {
+    padding: 1rem;
+  }
+
+  .add-car-card.maintenance-card,
+  .cars-list.maintenance-list {
+    padding: 1.5rem;
+  }
+
+  .summary-box {
+    min-width: 100%;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white;
+    direction: rtl;
+  }
+
+  .maintenance-page {
+    padding: 0;
+    width: 100%;
+  }
+
+  /* Hide elements that shouldn't be printed */
+  .no-print,
+  .filters-container,
+  .maintenance-calendar,
+  .loading,
+  .success-message,
+  .error-message,
+  .action-buttons,
+  .edit-btn,
+  .save-btn,
+  .cancel-btn,
+  nav,
+  header,
+  .sidebar {
+    display: none !important;
+  }
+
+  /* Show only the maintenance list */
+  .cars-list.maintenance-list {
+    max-width: 100%;
+    box-shadow: none;
+    padding: 20px;
+    margin: 0;
+    page-break-inside: avoid;
+  }
+
+  .report-header {
+    margin-bottom: 20px;
+    page-break-after: avoid;
+  }
+
+  .report-header h2 {
+    font-size: 24px;
+    color: #000;
+    text-align: center;
+    padding-bottom: 5px;
+    margin-bottom: 0.3rem;
+  }
+
+  .car-model-print {
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+
+  .print-date {
+    display: block !important;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #000;
+  }
+
+  .report-title-section {
+    width: 100%;
+  }
+
+  /* Summary section styling for print */
+  .summary-section.print-summary {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    page-break-inside: avoid;
+    page-break-after: avoid;
+  }
+
+  .summary-box {
+    flex: 1;
+    border: 1px solid #000;
+    padding: 15px;
+    background-color: white;
+    box-shadow: none;
+    page-break-inside: avoid;
+  }
+
+  /* Make yearly summary smaller/compact */
+  .summary-box:nth-child(2) {
+    flex: 0.6;
+    background-color: #f9fafb;
+  }
+
+  .summary-box:nth-child(2) h3 {
+    font-size: 0.95rem;
+  }
+
+  .summary-box:nth-child(2) .summary-row {
+    padding: 0.3rem 0;
+    font-size: 0.9rem;
+  }
+
+  .summary-box h3 {
+    color: #000;
+    font-size: 18px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+    color: #000;
+  }
+
+  .summary-row.total {
+    border-top: 2px solid #000;
+    font-weight: bold;
+    padding-top: 8px;
+    margin-top: 5px;
+  }
+
+  /* Table styling for print */
+  .cars-table-container {
+    page-break-inside: auto;
+  }
+
+  .cars-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  .cars-table th {
+    background-color: #f3f4f6 !important;
+    color: #000 !important;
+    border: 1px solid #000;
+    padding: 8px;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .cars-table td {
+    border: 1px solid #000;
+    padding: 6px;
+    color: #000;
+    font-size: 12px;
+  }
+
+  .cars-table tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  .cars-table tbody tr:nth-child(even) {
+    background-color: #f9fafb;
+  }
+
+  /* Hide action columns */
+  .cars-table th:last-child,
+  .cars-table td:last-child {
+    display: none;
+  }
+
+  /* Page break control */
+  h2 {
+    page-break-after: avoid;
+  }
+
+  .empty-message,
+  .loading-indicator {
+    display: none !important;
+  }
+
+  /* Print footer */
+  @page {
+    margin: 1.5cm;
+    size: A4;
+  }
+}

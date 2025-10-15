@@ -1,4 +1,4 @@
-import { Car, Filter } from "lucide-react";
+import { Car, Filter, Calendar } from "lucide-react";
 export const pages = [
   {
     name: "اضافة سيارة",
@@ -9,5 +9,15 @@ export const pages = [
     name: "تصفية السيارات",
     link: "/cars-filter",
     icon: <Filter />,
+  },
+  {
+    name: "التقرير الشهري",
+    link: "/monthly-detail",
+    icon: <Calendar />,
+  },
+  {
+    name: "الصيانة",
+    link: "/maintenance",
+    icon: <Car />,
   },
 ];
