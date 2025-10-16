@@ -367,3 +367,15 @@
   outline: none;
   background-color: #f0f7ff;
 }
+
+.driver-name-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  appearance: none;
+  direction: ltr;
+  padding: 20px;
+  font-size: 20px;
+  font-family: system-ui;
+}

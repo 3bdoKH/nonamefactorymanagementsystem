@@ -90,7 +90,6 @@ const CarsFilter = () => {
 
         fetchCars();
     }, []);
-    console.log(cars)
     const handleCarSelect = (car) => {
         setSelectedCar(car);
 
@@ -107,9 +106,40 @@ const CarsFilter = () => {
         try {
             const response = await axios.get(`http://127.0.0.1:8000/api/weekly/detail/?car_id=${carId}&date=${date}`);
             const data = response.data;
+
+            // Calculate the dates for the current week (Saturday to Thursday)
+            const currentDate = new Date(date);
+            const dayOfWeek = currentDate.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+
+            // Find the Saturday of the current week (first day in Arabic week)
+            let saturday = new Date(currentDate);
+            if (dayOfWeek === 0) { // If Sunday, go back 1 day
+                saturday.setDate(currentDate.getDate() - 1);
+            } else if (dayOfWeek !== 6) { // If not Saturday, go back to previous Saturday
+                saturday.setDate(currentDate.getDate() - (dayOfWeek + 1));
+            }
+
+            // Generate an array of dates for the week
+            const weekDates = [];
+            for (let i = 0; i < 6; i++) { // Saturday to Thursday (6 days)
+                const day = new Date(saturday);
+                day.setDate(saturday.getDate() + i);
+                weekDates.push(day.toISOString().split('T')[0]); // Format as YYYY-MM-DD
+            }
+
+            // Prepare daily entries with dates pre-filled
+            const dailyEntries = [
+                { day_name: 'السبت', inspection_date: weekDates[0], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                { day_name: 'الأحد', inspection_date: weekDates[1], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                { day_name: 'الاثنين', inspection_date: weekDates[2], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                { day_name: 'الثلاثاء', inspection_date: weekDates[3], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                { day_name: 'الأربعاء', inspection_date: weekDates[4], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                { day_name: 'الخميس', inspection_date: weekDates[5], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+            ];
+
             const newWeeklyData = {
-                week_start: data.week_start || '',
-                week_end: data.week_end || '',
+                week_start: weekDates[0], // Saturday
+                week_end: weekDates[5], // Thursday
                 odometer_start: data.odometer_start || 0,
                 odometer_end: data.odometer_end || 0,
                 distance: data.distance || 0,
@@ -136,14 +166,7 @@ const CarsFilter = () => {
                     washing: data.totals.washing || 0,
                     without: data.totals.without || 0
                 },
-                daily_entries: [
-                    { day_name: 'السبت', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-                    { day_name: 'الأحد', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-                    { day_name: 'الاثنين', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-                    { day_name: 'الثلاثاء', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-                    { day_name: 'الأربعاء', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-                    { day_name: 'الخميس', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-                ]
+                daily_entries: dailyEntries
             };
 
             if (data.daily_entries && data.daily_entries.length > 0) {
@@ -190,9 +213,39 @@ const CarsFilter = () => {
                 weeklyData: 'حدث خطأ أثناء جلب بيانات الأسبوع. يرجى المحاولة مرة أخرى.'
             }));
 
+            // Calculate the dates for the current week (Saturday to Thursday) even in error case
+            const currentDate = new Date(date);
+            const dayOfWeek = currentDate.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+
+            // Find the Saturday of the current week (first day in Arabic week)
+            let saturday = new Date(currentDate);
+            if (dayOfWeek === 0) { // If Sunday, go back 1 day
+                saturday.setDate(currentDate.getDate() - 1);
+            } else if (dayOfWeek !== 6) { // If not Saturday, go back to previous Saturday
+                saturday.setDate(currentDate.getDate() - (dayOfWeek + 1));
+            }
+
+            // Generate an array of dates for the week
+            const weekDates = [];
+            for (let i = 0; i < 6; i++) { // Saturday to Thursday (6 days)
+                const day = new Date(saturday);
+                day.setDate(saturday.getDate() + i);
+                weekDates.push(day.toISOString().split('T')[0]); // Format as YYYY-MM-DD
+            }
+
+            // Prepare daily entries with dates pre-filled
+            const dailyEntries = [
+                { day_name: 'السبت', inspection_date: weekDates[0], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                { day_name: 'الأحد', inspection_date: weekDates[1], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                { day_name: 'الاثنين', inspection_date: weekDates[2], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                { day_name: 'الثلاثاء', inspection_date: weekDates[3], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                { day_name: 'الأربعاء', inspection_date: weekDates[4], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                { day_name: 'الخميس', inspection_date: weekDates[5], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+            ];
+
             setWeeklyData({
-                week_start: '',
-                week_end: '',
+                week_start: weekDates[0], // Saturday
+                week_end: weekDates[5], // Thursday
                 odometer_start: 0,
                 odometer_end: 0,
                 distance: 0,
@@ -219,14 +272,7 @@ const CarsFilter = () => {
                     washing: 0,
                     without: 0
                 },
-                daily_entries: [
-                    { day_name: 'السبت', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-                    { day_name: 'الأحد', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-                    { day_name: 'الاثنين', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-                    { day_name: 'الثلاثاء', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-                    { day_name: 'الأربعاء', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-                    { day_name: 'الخميس', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-                ]
+                daily_entries: dailyEntries
             });
         } finally {
             setLoading(prev => ({ ...prev, weeklyData: false }));
@@ -463,10 +509,31 @@ const CarsFilter = () => {
                 }
             }
 
-            // Reset weekly data in the UI
+            // Calculate the dates for the current week
+            const today = new Date();
+            const todayStr = today.toISOString().split('T')[0];
+            const dayOfWeek = today.getDay();
+
+            // Find the Saturday of the current week
+            let saturday = new Date(today);
+            if (dayOfWeek === 0) { // If Sunday, go back 1 day
+                saturday.setDate(today.getDate() - 1);
+            } else if (dayOfWeek !== 6) { // If not Saturday, go back to previous Saturday
+                saturday.setDate(today.getDate() - (dayOfWeek + 1));
+            }
+
+            // Generate an array of dates for the week
+            const weekDates = [];
+            for (let i = 0; i < 6; i++) { // Saturday to Thursday (6 days)
+                const day = new Date(saturday);
+                day.setDate(saturday.getDate() + i);
+                weekDates.push(day.toISOString().split('T')[0]);
+            }
+
+            // Reset weekly data in the UI with dates pre-filled
             setWeeklyData({
-                week_start: '',
-                week_end: '',
+                week_start: weekDates[0],
+                week_end: weekDates[5],
                 odometer_start: 0,
                 odometer_end: 0,
                 distance: 0,
@@ -477,7 +544,7 @@ const CarsFilter = () => {
                 net_expenses: 0,
                 net_revenue: 0,
                 default_net_revenue: 0,
-                week_ref_date: new Date().toISOString().split('T')[0],
+                week_ref_date: todayStr,
                 totals: {
                     freight: 0,
                     default_freight: 0,
@@ -494,12 +561,12 @@ const CarsFilter = () => {
                     without: 0
                 },
                 daily_entries: [
-                    { day_name: 'السبت', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-                    { day_name: 'الأحد', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-                    { day_name: 'الاثنين', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-                    { day_name: 'الثلاثاء', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-                    { day_name: 'الأربعاء', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-                    { day_name: 'الخميس', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
+                    { day_name: 'السبت', inspection_date: weekDates[0], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                    { day_name: 'الأحد', inspection_date: weekDates[1], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                    { day_name: 'الاثنين', inspection_date: weekDates[2], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                    { day_name: 'الثلاثاء', inspection_date: weekDates[3], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                    { day_name: 'الأربعاء', inspection_date: weekDates[4], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                    { day_name: 'الخميس', inspection_date: weekDates[5], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
                 ]
             });
 
@@ -607,21 +674,21 @@ const CarsFilter = () => {
                                             <tr key={index}>
                                                 <td>{day.day_name}</td>
                                                 <td><input type="date" value={day.inspection_date} onChange={(e) => handleInputChange(index, 'inspection_date', e.target.value)} /></td>
-                                                <td><input type="text" value={day.driver_name} onChange={(e) => handleInputChange(index, 'driver_name', e.target.value)} /></td>
-                                                <td><input type="text" value={day.area} onChange={(e) => handleInputChange(index, 'area', e.target.value)} /></td>
-                                                <td><input type="number" value={day.freight} onChange={(e) => handleInputChange(index, 'freight', e.target.value)} /></td>
-                                                <td><input type="number" value={day.default_freight} onChange={(e) => handleInputChange(index, 'default_freight', e.target.value)} /></td>
-                                                <td><input type="number" value={day.gas} onChange={(e) => handleInputChange(index, 'gas', e.target.value)} /></td>
-                                                <td><input type="number" value={day.oil} onChange={(e) => handleInputChange(index, 'oil', e.target.value)} /></td>
-                                                <td><input type="number" value={day.card} onChange={(e) => handleInputChange(index, 'card', e.target.value)} /></td>
-                                                <td><input type="number" value={day.fines} onChange={(e) => handleInputChange(index, 'fines', e.target.value)} /></td>
-                                                <td><input type="number" value={day.tips} onChange={(e) => handleInputChange(index, 'tips', e.target.value)} /></td>
-                                                <td><input type="number" value={day.spare_parts} onChange={(e) => handleInputChange(index, 'spare_parts', e.target.value)} /></td>
-                                                <td><input type="number" value={day.tires} onChange={(e) => handleInputChange(index, 'tires', e.target.value)} /></td>
-                                                <td><input type="number" value={day.balance} onChange={(e) => handleInputChange(index, 'balance', e.target.value)} /></td>
-                                                <td><input type="number" value={day.washing} onChange={(e) => handleInputChange(index, 'washing', e.target.value)} /></td>
-                                                <td><input type="number" value={day.without} onChange={(e) => handleInputChange(index, 'without', e.target.value)} /></td>
-                                                <td><input type="number" value={day.maintenance} onChange={(e) => handleInputChange(index, 'maintenance', e.target.value)} /></td>
+                                                <td><input className="driver-name-input" type="text" value={day.driver_name} onChange={(e) => handleInputChange(index, 'driver_name', e.target.value)} /></td>
+                                                <td><input className="area-input" type="text" value={day.area} onChange={(e) => handleInputChange(index, 'area', e.target.value)} /></td>
+                                                <td><input type="number" value={day.freight === "0.00" ? '' : day.freight.split('.')[0]} onChange={(e) => handleInputChange(index, 'freight', e.target.value)} /></td>
+                                                <td><input type="number" value={day.default_freight === "0.00" ? '' : day.default_freight.split('.')[0]} onChange={(e) => handleInputChange(index, 'default_freight', e.target.value)} /></td>
+                                                <td><input type="number" value={day.gas === "0.00" ? '' : day.gas.split('.')[0]} onChange={(e) => handleInputChange(index, 'gas', e.target.value)} /></td>
+                                                <td><input type="number" value={day.oil === "0.00" ? '' : day.oil.split('.')[0]} onChange={(e) => handleInputChange(index, 'oil', e.target.value)} /></td>
+                                                <td><input type="number" value={day.card === "0.00" ? '' : day.card.split('.')[0]} onChange={(e) => handleInputChange(index, 'card', e.target.value)} /></td>
+                                                <td><input type="number" value={day.fines === "0.00" ? '' : day.fines.split('.')[0]} onChange={(e) => handleInputChange(index, 'fines', e.target.value)} /></td>
+                                                <td><input type="number" value={day.tips === "0.00" ? '' : day.tips.split('.')[0]} onChange={(e) => handleInputChange(index, 'tips', e.target.value)} /></td>
+                                                <td><input type="number" value={day.spare_parts === "0.00" ? '' : day.spare_parts.split('.')[0]} onChange={(e) => handleInputChange(index, 'spare_parts', e.target.value)} /></td>
+                                                <td><input type="number" value={day.tires === "0.00" ? '' : day.tires.split('.')[0]} onChange={(e) => handleInputChange(index, 'tires', e.target.value)} /></td>
+                                                <td><input type="number" value={day.balance === "0.00" ? '' : day.balance.split('.')[0]} onChange={(e) => handleInputChange(index, 'balance', e.target.value)} /></td>
+                                                <td><input type="number" value={day.washing === "0.00" ? '' : day.washing.split('.')[0]} onChange={(e) => handleInputChange(index, 'washing', e.target.value)} /></td>
+                                                <td><input type="number" value={day.without === "0.00" ? '' : day.without.split('.')[0]} onChange={(e) => handleInputChange(index, 'without', e.target.value)} /></td>
+                                                <td><input type="number" value={day.maintenance === "0.00" ? '' : day.maintenance.split('.')[0]} onChange={(e) => handleInputChange(index, 'maintenance', e.target.value)} /></td>
                                             </tr>
                                         ))}
 
@@ -644,18 +711,18 @@ const CarsFilter = () => {
 
                                         <tr className="meta-row">
                                             <td colSpan="2">عداد أول المدة</td>
-                                            <td colSpan="2"><input type="number" value={weeklyData.odometer_start} onChange={(e) => handleMetadataChange('odometer_start', e.target.value)} /></td>
+                                            <td colSpan="2"><input type="number" value={weeklyData.odometer_start === 0 ? '' : weeklyData.odometer_start} onChange={(e) => handleMetadataChange('odometer_start', e.target.value)} /></td>
                                             <td colSpan="2">مرتب السائق</td>
-                                            <td colSpan="2"><input type="number" value={weeklyData.driver_salary} onChange={(e) => handleMetadataChange('driver_salary', e.target.value)} /></td>
+                                            <td colSpan="2"><input type="number" value={weeklyData.driver_salary === "0.00" ? '' : weeklyData.driver_salary} onChange={(e) => handleMetadataChange('driver_salary', e.target.value)} /></td>
                                             <td colSpan="2">العهدة</td>
-                                            <td colSpan="2"><input type="number" value={weeklyData.custody} onChange={(e) => handleMetadataChange('custody', e.target.value)} /></td>
+                                            <td colSpan="2"><input type="number" value={weeklyData.custody === "0.00" ? '' : weeklyData.custody} onChange={(e) => handleMetadataChange('custody', e.target.value)} /></td>
                                             <td colSpan="2">إجمالي الإيرادات</td>
                                             <td colSpan="3">{weeklyData.net_revenue}</td>
                                         </tr>
 
                                         <tr className="meta-row">
                                             <td colSpan="2">عداد آخر المدة</td>
-                                            <td colSpan="2"><input type="number" value={weeklyData.odometer_end} onChange={(e) => handleMetadataChange('odometer_end', e.target.value)} /></td>
+                                            <td colSpan="2"><input type="number" value={weeklyData.odometer_end === 0 ? '' : weeklyData.odometer_end} onChange={(e) => handleMetadataChange('odometer_end', e.target.value)} /></td>
                                             <td colSpan="2">متوسط استهلاك الجاز/كم</td>
                                             <td colSpan="2">
                                                 {(() => {
