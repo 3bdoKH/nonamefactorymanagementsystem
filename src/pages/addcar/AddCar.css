@@ -161,8 +161,7 @@
     border-radius: 12px;
     box-shadow: var(--shadow-md);
     padding: 2.5rem;
-    width: 100%;
-    max-width: 1000px;
+    width: calc(100% - 40px);
 }
 
 .cars-list h2 {

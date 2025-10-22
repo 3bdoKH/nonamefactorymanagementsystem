@@ -5,6 +5,7 @@
   height: 100%;
   direction: rtl;
   font-family: 'Cairo', sans-serif;
+
 }
 
 .cars-list {
@@ -125,7 +126,7 @@
 .report-table th,
 .report-table td {
   border: 1px solid #ddd;
-  padding: 8px 12px;
+  padding: 8px 0px;
 }
 
 .report-table th {
@@ -138,7 +139,7 @@
 }
 
 .report-table input {
-  width: 100%;
+  width: 80%;
   border: none;
   background: transparent;
   text-align: center;
@@ -160,6 +161,8 @@
   -webkit-appearance: none;
   margin: 0;
 }
+
+
 
 .totals-row {
   font-weight: bold;
@@ -376,6 +379,5 @@
   appearance: none;
   direction: ltr;
   padding: 20px;
-  font-size: 20px;
   font-family: system-ui;
 }

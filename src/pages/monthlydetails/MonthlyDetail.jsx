@@ -198,16 +198,12 @@ const MonthlyDetail = () => {
                                             <td>{monthlyData.odometer_start}</td>
                                             <td>عداد اخر الشهر</td>
                                             <td>{monthlyData.odometer_end}</td>
-                                            <td>اجمالي المسافه</td>
-                                            <td>{monthlyData.distance_total}</td>
+
                                             <td>اجمالي الجاز</td>
                                             <td>{monthlyData.gas_total}</td>
                                             <td>متوسط استهلاك الجاز \ كم</td>
                                             <td>{monthlyData.gas_per_km}</td>
-                                        </tr>
-                                        <tr className="meta-row">
-                                            <td>اجمالي المرتبات</td>
-                                            <td>{monthlyData.driver_salary_total}</td>
+
                                             <td> إجمالي الايرادات الاضافية</td>
                                             <td>{monthlyData.default_net_revenue_total}</td>
                                         </tr>

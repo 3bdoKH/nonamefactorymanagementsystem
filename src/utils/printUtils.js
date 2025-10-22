@@ -385,7 +385,7 @@ export const printMaintenanceReport = (
           parseFloat(entry.oil_change) +
           parseFloat(entry.price)
         ).toFixed(2)}</td>
-        <td>${entry.spare_part_type || "-"}</td>
+        <td>${entry.spare_part_type.slice(0, 20) || "-"}</td>
       </tr>
     `);
   });

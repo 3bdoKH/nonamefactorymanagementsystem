@@ -652,8 +652,8 @@ const CarsFilter = () => {
                                         <tr>
                                             <th>اليوم</th>
                                             <th>التاريخ</th>
-                                            <th>السواق</th>
-                                            <th>المنطقه</th>
+                                            <th className="driver-name" style={{ padding: '10px 50px' }}>السواق</th>
+                                            <th className="area-name" style={{ padding: '10px 50px' }}>المنطقه</th>
                                             <th>النولون</th>
                                             <th>النولون الاضافي</th>
                                             <th>جاز</th>

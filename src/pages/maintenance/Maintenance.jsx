@@ -12,7 +12,11 @@ const Maintenance = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [activeRow, setActiveRow] = useState(null);
+  const [showSparePartPopup, setShowSparePartPopup] = useState(false);
+  const [currentSparePartType, setCurrentSparePartType] = useState('');
+  const [editingRowIndex, setEditingRowIndex] = useState(null);
 
   const fetchCars = useCallback(async () => {
     try {
@@ -194,6 +198,29 @@ const Maintenance = () => {
     setActiveRow(index);
   };
 
+  const handleSparePartSave = (value) => {
+    if (editingRowIndex !== null) {
+      setMonthData(prevData => {
+        const updatedData = [...prevData];
+        updatedData[editingRowIndex] = {
+          ...updatedData[editingRowIndex],
+          spare_part_type: value,
+          isEditing: true
+        };
+        return updatedData;
+      });
+    }
+    setShowSparePartPopup(false);
+    setCurrentSparePartType('');
+    setEditingRowIndex(null);
+  };
+
+  const handleSparePartCancel = () => {
+    setShowSparePartPopup(false);
+    setCurrentSparePartType('');
+    setEditingRowIndex(null);
+  };
+
   // This function is no longer used - we're using handleRowSubmit instead
 
   const handleRowSubmit = async (dayData, index) => {
@@ -365,7 +392,7 @@ const Maintenance = () => {
   };
 
   const formatCurrency = (value) => {
-    return parseFloat(value).toFixed(2);
+    return value === 0 ? ' ' : value.toString().split('.')[0];
   };
 
   const getDayName = (dateString) => {
@@ -411,6 +438,7 @@ const Maintenance = () => {
     // Call the print function from printUtils
     printMaintenanceReport(carDetails, monthYear, maintenanceData);
   };
+  console.log(monthData);
 
   return (
     <div className="maintenance-page">
@@ -493,7 +521,7 @@ const Maintenance = () => {
                         {day.isEditing ? (
                           <input
                             type="number"
-                            value={day.air_filter}
+                            value={day.air_filter === 0 ? '' : day.air_filter}
                             onChange={(e) => handleInputChange(e, index, 'air_filter')}
                             min="0"
                             step="0.01"
@@ -506,7 +534,7 @@ const Maintenance = () => {
                         {day.isEditing ? (
                           <input
                             type="number"
-                            value={day.oil_filter}
+                            value={day.oil_filter === 0 ? '' : day.oil_filter}
                             onChange={(e) => handleInputChange(e, index, 'oil_filter')}
                             min="0"
                             step="0.01"
@@ -519,7 +547,7 @@ const Maintenance = () => {
                         {day.isEditing ? (
                           <input
                             type="number"
-                            value={day.gas_filter}
+                            value={day.gas_filter === 0 ? '' : day.gas_filter}
                             onChange={(e) => handleInputChange(e, index, 'gas_filter')}
                             min="0"
                             step="0.01"
@@ -532,7 +560,7 @@ const Maintenance = () => {
                         {day.isEditing ? (
                           <input
                             type="number"
-                            value={day.oil_change}
+                            value={day.oil_change === 0 ? '' : day.oil_change}
                             onChange={(e) => handleInputChange(e, index, 'oil_change')}
                             min="0"
                             step="0.01"
@@ -545,7 +573,7 @@ const Maintenance = () => {
                         {day.isEditing ? (
                           <input
                             type="number"
-                            value={day.price}
+                            value={day.price === 0 ? '' : day.price}
                             onChange={(e) => handleInputChange(e, index, 'price')}
                             min="0"
                             step="0.01"
@@ -556,14 +584,19 @@ const Maintenance = () => {
                       </td>
                       <td>
                         {day.isEditing ? (
-                          <input
-                            type="text"
-                            value={day.spare_part_type}
-                            onChange={(e) => handleInputChange(e, index, 'spare_part_type')}
-                            placeholder="نوع قطع الغيار"
-                          />
+                          <button
+                            type="button"
+                            className="spare-part-btn"
+                            onClick={() => {
+                              setCurrentSparePartType(day.spare_part_type);
+                              setEditingRowIndex(index);
+                              setShowSparePartPopup(true);
+                            }}
+                          >
+                            {day.spare_part_type ? 'تعديل نوع قطع الغيار' : 'إضافة نوع قطع الغيار'}
+                          </button>
                         ) : (
-                          day.spare_part_type
+                          day.spare_part_type.slice(0, 10)
                         )}
                       </td>
                       <td className="total-column">
@@ -627,6 +660,14 @@ const Maintenance = () => {
       )}
 
       {loading && <div className="loading">Loading...</div>}
+
+      {/* Spare Part Type Popup */}
+      <SparePartTypePopup
+        visible={showSparePartPopup}
+        sparePartType={currentSparePartType}
+        onSave={handleSparePartSave}
+        onCancel={handleSparePartCancel}
+      />
 
       {maintenanceData && (
         <div className="cars-list maintenance-list">
@@ -751,7 +792,7 @@ const Maintenance = () => {
                           parseFloat(entry.price)
                         )}
                       </td>
-                      <td>{entry.spare_part_type}</td>
+                      <td>{entry.spare_part_type.slice(0, 10)}</td>
                       <td className="action-buttons">
                         <button
                           className="edit-btn"
@@ -797,6 +838,41 @@ const Maintenance = () => {
           )}
         </div>
       )}
+    </div>
+  );
+};
+
+// Spare Part Type Popup Component
+const SparePartTypePopup = ({ visible, sparePartType, onSave, onCancel }) => {
+  const [value, setValue] = useState(sparePartType || '');
+
+  // Update value when sparePartType changes (new day selected)
+  useEffect(() => {
+    setValue(sparePartType || '');
+  }, [sparePartType, visible]);
+
+  const handleSave = () => {
+    onSave(value);
+  };
+
+  if (!visible) return null;
+
+  return (
+    <div className="spare-part-popup-overlay">
+      <div className="spare-part-popup">
+        <h3>نوع قطع الغيار</h3>
+        <textarea
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="أدخل نوع قطع الغيار"
+          rows={4}
+          autoFocus
+        />
+        <div className="popup-buttons">
+          <button className="save-btn" onClick={handleSave}>حفظ</button>
+          <button className="cancel-btn" onClick={onCancel}>إلغاء</button>
+        </div>
+      </div>
     </div>
   );
 };
