@@ -29,7 +29,11 @@ const MonthlyDetail = () => {
         net_expenses_total: 0,
         net_revenue_total: 0,
         default_net_revenue_total: 0,
-        weeks: []
+        weeks: [],
+        net_car_total: 0,
+        net_driver_total: 0,
+        perished_total: 0,
+        daily_totals: {},
     })
 
     // Fetch cars from API
@@ -151,25 +155,26 @@ const MonthlyDetail = () => {
                                 <table className="report-table" ref={printSectionRef}>
                                     <thead>
                                         <tr>
-                                            <th>بداية الاسبوع</th>
-                                            <th>نهاية الاسبوع</th>
-                                            <th>بداية العداد</th>
-                                            <th>نهاية العداد</th>
+                                            <th colSpan={2}>بداية الاسبوع</th>
+                                            <th colSpan={2}>نهاية الاسبوع</th>
+                                            <th colSpan={2}>بداية العداد</th>
+                                            <th colSpan={2}>نهاية العداد</th>
                                             <th>اجمالي المسافه</th>
                                             <th>راتب السائق</th>
                                             <th>العهدة</th>
                                             <th>اجمالي المصروفات</th>
                                             <th>اجمالي الايرادات</th>
                                             <th>اجمالي الايرادات الاضافية</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {monthlyData.weeks.map((week, index) => (
                                             <tr key={index}>
-                                                <td>{week.week_start}</td>
-                                                <td>{week.week_end}</td>
-                                                <td>{week.odometer_start}</td>
-                                                <td>{week.odometer_end}</td>
+                                                <td colSpan={2}>{week.week_start}</td>
+                                                <td colSpan={2}>{week.week_end}</td>
+                                                <td colSpan={2}>{week.odometer_start}</td>
+                                                <td colSpan={2}>{week.odometer_end}</td>
                                                 <td>{week.distance}</td>
                                                 <td>{week.driver_salary}</td>
                                                 <td>{week.custody}</td>
@@ -179,7 +184,40 @@ const MonthlyDetail = () => {
                                             </tr>
                                         ))}
                                         <tr className='totals-row'>
-                                            <td colSpan="10">الإجمالي</td>
+                                            <td colSpan="14">الإجماليات</td>
+                                        </tr>
+                                        <tr className="daily-totals-head">
+                                            <th>النولون</th>
+                                            <th colSpan={2}>النولون الاضافي</th>
+                                            <th>جاز</th>
+                                            <th>زيت</th>
+                                            <th>كرت</th>
+                                            <th>غرامات</th>
+                                            <th>اكراميات</th>
+                                            <th>قطع غيار</th>
+                                            <th>كاوتش</th>
+                                            <th>ميزان</th>
+                                            <th>غسيل</th>
+                                            <th>بدون</th>
+                                            <th>صيانه</th>
+                                        </tr>
+                                        <tr className="daily-totals">
+                                            <td>{monthlyData.daily_totals.freight}</td>
+                                            <td colSpan={2}>{monthlyData.daily_totals.default_freight}</td>
+                                            <td>{monthlyData.daily_totals.gas}</td>
+                                            <td>{monthlyData.daily_totals.oil}</td>
+                                            <td>{monthlyData.daily_totals.card}</td>
+                                            <td>{monthlyData.daily_totals.fines}</td>
+                                            <td>{monthlyData.daily_totals.tips}</td>
+                                            <td>{monthlyData.daily_totals.spare_parts}</td>
+                                            <td>{monthlyData.daily_totals.tires}</td>
+                                            <td>{monthlyData.daily_totals.balance}</td>
+                                            <td>{monthlyData.daily_totals.washing}</td>
+                                            <td>{monthlyData.daily_totals.without}</td>
+                                            <td>{monthlyData.daily_totals.maintenance}</td>
+                                        </tr>
+                                        <tr className='totals-row'>
+                                            <td colSpan="14">الإجمالي</td>
                                         </tr>
                                         <tr className="meta-row">
                                             <td>اجمالي المسافه</td>
@@ -192,20 +230,24 @@ const MonthlyDetail = () => {
                                             <td>{monthlyData.net_expenses_total}</td>
                                             <td>اجمالي الايرادات</td>
                                             <td>{monthlyData.net_revenue_total}</td>
+                                            <td>صافي السيارة</td>
+                                            <td>{monthlyData.net_car_total}</td>
+                                            <td>صافي السواق</td>
+                                            <td>{monthlyData.net_driver_total}</td>
                                         </tr>
                                         <tr className="meta-row">
                                             <td>عداد أول الشهر</td>
                                             <td>{monthlyData.odometer_start}</td>
                                             <td>عداد اخر الشهر</td>
                                             <td>{monthlyData.odometer_end}</td>
-
                                             <td>اجمالي الجاز</td>
                                             <td>{monthlyData.gas_total}</td>
                                             <td>متوسط استهلاك الجاز \ كم</td>
                                             <td>{monthlyData.gas_per_km}</td>
-
                                             <td> إجمالي الايرادات الاضافية</td>
                                             <td>{monthlyData.default_net_revenue_total}</td>
+                                            <td>الاهلاك</td>
+                                            <td>{monthlyData.perished_total}</td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -28,11 +28,14 @@ const CarsFilter = () => {
         gas_per_km: 0,
         driver_salary: 0,
         custody: 0,
+        perished: 0,
         description: '',
         net_expenses: 0,
         net_revenue: 0,
         default_net_revenue: 0,
+        net_driver: 0,
         week_ref_date: '',
+        net_car: 0,
         totals: {
             freight: 0,
             default_freight: 0,
@@ -106,7 +109,6 @@ const CarsFilter = () => {
         try {
             const response = await axios.get(`http://127.0.0.1:8000/api/weekly/detail/?car_id=${carId}&date=${date}`);
             const data = response.data;
-
             // Calculate the dates for the current week (Saturday to Thursday)
             const currentDate = new Date(date);
             const dayOfWeek = currentDate.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
@@ -150,6 +152,9 @@ const CarsFilter = () => {
                 net_expenses: data.net_expenses || 0,
                 net_revenue: data.net_revenue || 0,
                 default_net_revenue: data.default_net_revenue || 0,
+                net_driver: data.net_driver || 0,
+                net_car: data.net_car || 0,
+                perished: data.perished || 0,
                 week_ref_date: date,
                 totals: {
                     freight: data.totals.freight || 0,
@@ -166,7 +171,7 @@ const CarsFilter = () => {
                     washing: data.totals.washing || 0,
                     without: data.totals.without || 0
                 },
-                daily_entries: dailyEntries
+                daily_entries: dailyEntries,
             };
 
             if (data.daily_entries && data.daily_entries.length > 0) {
@@ -256,6 +261,9 @@ const CarsFilter = () => {
                 net_expenses: 0,
                 net_revenue: 0,
                 default_net_revenue: 0,
+                net_driver: 0,
+                net_car: 0,
+                perished: 0,
                 week_ref_date: date,
                 totals: {
                     freight: 0,
@@ -392,7 +400,10 @@ const CarsFilter = () => {
                 odometer_end: parseFloat(weeklyData.odometer_end) || 0,
                 driver_salary: parseFloat(weeklyData.driver_salary) || 0,
                 custody: parseFloat(weeklyData.custody) || 0,
-                description: weeklyData.description || ''
+                description: weeklyData.description || '',
+                net_driver: parseFloat(weeklyData.net_driver) || 0,
+                net_car: parseFloat(weeklyData.net_car) || 0,
+                perished: parseFloat(weeklyData.perished) || 0,
             };
             await axios.post('http://127.0.0.1:8000/api/weekly/', apiData);
             alert('تم حفظ ملخص الأسبوع بنجاح');
@@ -483,7 +494,10 @@ const CarsFilter = () => {
                         tires: 0,
                         balance: 0,
                         washing: 0,
-                        without: 0
+                        without: 0,
+                        net_driver: 0,
+                        net_car: 0,
+                        perished: 0,
                     };
                     await axios.put('http://127.0.0.1:8000/api/daily-entries/by-date/', apiData);
                 } catch (err) {
@@ -500,7 +514,10 @@ const CarsFilter = () => {
                         odometer_end: 0,
                         driver_salary: 0,
                         custody: 0,
-                        description: ''
+                        description: '',
+                        net_driver: 0,
+                        net_car: 0,
+                        perished: 0,
                     };
 
                     await axios.put('http://127.0.0.1:8000/api/weekly/by-date/', weeklyApiData);
@@ -558,7 +575,10 @@ const CarsFilter = () => {
                     tires: 0,
                     balance: 0,
                     washing: 0,
-                    without: 0
+                    without: 0,
+                    net_driver: 0,
+                    net_car: 0,
+                    perished: 0,
                 },
                 daily_entries: [
                     { day_name: 'السبت', inspection_date: weekDates[0], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
@@ -713,11 +733,11 @@ const CarsFilter = () => {
                                             <td colSpan="2">عداد أول المدة</td>
                                             <td colSpan="2"><input type="number" value={weeklyData.odometer_start === 0 ? '' : weeklyData.odometer_start} onChange={(e) => handleMetadataChange('odometer_start', e.target.value)} /></td>
                                             <td colSpan="2">مرتب السائق</td>
-                                            <td colSpan="2"><input type="number" value={weeklyData.driver_salary === "0.00" ? '' : weeklyData.driver_salary} onChange={(e) => handleMetadataChange('driver_salary', e.target.value)} /></td>
+                                            <td colSpan="2"><input type="number" value={weeklyData.driver_salary === "0.00" ? '' : parseFloat(weeklyData.driver_salary).toFixed(0)} onChange={(e) => handleMetadataChange('driver_salary', e.target.value)} /></td>
                                             <td colSpan="2">العهدة</td>
-                                            <td colSpan="2"><input type="number" value={weeklyData.custody === "0.00" ? '' : weeklyData.custody} onChange={(e) => handleMetadataChange('custody', e.target.value)} /></td>
+                                            <td colSpan="2"><input type="number" value={weeklyData.custody === "0.00" ? '' : parseFloat(weeklyData.custody).toFixed(0)} onChange={(e) => handleMetadataChange('custody', e.target.value)} /></td>
                                             <td colSpan="2">إجمالي الإيرادات</td>
-                                            <td colSpan="3">{weeklyData.net_revenue}</td>
+                                            <td colSpan="3">{parseFloat(weeklyData.net_revenue).toFixed(0)}</td>
                                         </tr>
 
                                         <tr className="meta-row">
@@ -732,13 +752,29 @@ const CarsFilter = () => {
                                             </td>
                                             <td colSpan="2">المصروفات</td>
                                             <td colSpan="2">
-                                                {weeklyData.net_expenses}
+                                                {parseFloat(weeklyData.net_expenses).toFixed(0)}
                                             </td>
                                             <td colSpan="2"> اجمالي الايرادات الاضافية</td>
                                             <td colSpan="3">
-                                                {weeklyData.default_net_revenue}
+                                                {parseFloat(weeklyData.default_net_revenue).toFixed(0)}
                                             </td>
                                         </tr>
+
+                                        <tr className="meta-row">
+                                            <td colSpan="2">صافي السواق</td>
+                                            <td colSpan="2">
+                                                {parseFloat(weeklyData.net_driver).toFixed(0)}
+                                            </td>
+                                            <td colSpan="2">صافي السيارة</td>
+                                            <td colSpan="2">
+                                                {parseFloat(weeklyData.net_car).toFixed(0)}
+                                            </td>
+                                            <td colSpan="2">الاهلاك</td>
+                                            <td colSpan="7">
+                                                <input type="number" value={weeklyData.perished === 0 ? '' : parseFloat(weeklyData.perished).toFixed(0)} onChange={(e) => handleMetadataChange('perished', e.target.value)} />
+                                            </td>
+                                        </tr>
+
                                         <tr className="meta-row">
                                             <td colSpan="2">ملاحظات</td>
                                             <td colSpan="15">

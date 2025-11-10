@@ -63,9 +63,9 @@ export const printCarWeeklyReport = (selectedCar, weeklyData) => {
           <td colSpan="2">متوسط استهلاك الجاز/كم</td>
           <td colSpan="2">
               ${(() => {
-                const gasPerKm = parseFloat(weeklyData.gas_per_km);
-                return !isNaN(gasPerKm) ? gasPerKm.toFixed(2) : "0";
-              })()}
+      const gasPerKm = parseFloat(weeklyData.gas_per_km);
+      return !isNaN(gasPerKm) ? gasPerKm.toFixed(2) : "0";
+    })()}
           </td>
           <td colSpan="2">المصروفات</td>
           <td colSpan="2">
@@ -74,6 +74,20 @@ export const printCarWeeklyReport = (selectedCar, weeklyData) => {
           <td colSpan="2"> اجمالي الايرادات الاضافية</td>
           <td colSpan="3">
               ${weeklyData.default_net_revenue}
+          </td>
+      </tr>
+      <tr className="meta-row">
+          <td colSpan="2">صافي السواق</td>
+          <td colSpan="2">
+              ${parseFloat(weeklyData.net_driver).toFixed(0)}
+          </td>
+          <td colSpan="2">صافي السيارة</td>
+          <td colSpan="2">
+              ${parseFloat(weeklyData.net_car).toFixed(0)}
+          </td>
+          <td colSpan="2">الاهلاك</td>
+          <td colSpan="7">
+                ${parseFloat(weeklyData.perished).toFixed(0)}
           </td>
       </tr>
       <tr className="meta-row">
@@ -207,10 +221,10 @@ export const printCarMonthlyReport = (selectedCar, monthlyData) => {
   monthlyData.weeks.forEach((week) => {
     tableRows.push(`
       <tr>
-        <td>${week.week_start}</td>
-        <td>${week.week_end}</td>
-        <td>${week.odometer_start}</td>
-        <td>${week.odometer_end}</td>
+        <td colSpan="2">${week.week_start}</td>
+        <td colSpan="2">${week.week_end}</td>
+        <td colSpan="2">${week.odometer_start}</td>
+        <td colSpan="2">${week.odometer_end}</td>
         <td>${week.distance}</td>
         <td>${week.driver_salary}</td>
         <td>${week.custody}</td>
@@ -223,32 +237,71 @@ export const printCarMonthlyReport = (selectedCar, monthlyData) => {
 
   tableRows.push(`
     <tr className='totals-row'>
-        <td colSpan="10">الإجمالي</td>
+        <td colSpan="14">الإجماليات</td>
+    </tr>
+    <tr className="daily-totals-head">
+        <th>النولون</th>
+        <th colSpan="2">النولون الاضافي</th>
+        <th>جاز</th>
+        <th>زيت</th>
+        <th>كرت</th>
+        <th>غرامات</th>
+        <th>اكراميات</th>
+        <th>قطع غيار</th>
+        <th>كاوتش</th>
+        <th>ميزان</th>
+        <th>غسيل</th>
+        <th>بدون</th>
+        <th>صيانه</th>
+    </tr>
+    <tr className="daily-totals">
+        <td>${monthlyData.daily_totals.freight}</td>
+        <td colSpan="2">${monthlyData.daily_totals.default_freight}</td>
+        <td>${monthlyData.daily_totals.gas}</td>
+        <td>${monthlyData.daily_totals.oil}</td>
+        <td>${monthlyData.daily_totals.card}</td>
+        <td>${monthlyData.daily_totals.fines}</td>
+        <td>${monthlyData.daily_totals.tips}</td>
+        <td>${monthlyData.daily_totals.spare_parts}</td>
+        <td>${monthlyData.daily_totals.tires}</td>
+        <td>${monthlyData.daily_totals.balance}</td>
+        <td>${monthlyData.daily_totals.washing}</td>
+        <td>${monthlyData.daily_totals.without}</td>
+        <td>${monthlyData.daily_totals.maintenance}</td>
+    </tr>
+    <tr className='totals-row'>
+        <td colSpan="14">الإجمالي</td>
     </tr>
     <tr className="meta-row">
-        <td>اجمالي المرتبات</td>
-        <td>${monthlyData.driver_salary_total}</td>
-        <td>اجمالي العهدة</td>
-        <td>${monthlyData.custody_total}</td>
-        <td>اجمالي المصروفات</td>
-        <td>${monthlyData.net_expenses_total}</td>
-        <td>اجمالي الايرادات</td>
-        <td>${monthlyData.net_revenue_total}</td>
-        <td> إجمالي الايرادات الاضافية</td>
-        <td>${monthlyData.default_net_revenue_total}</td>
-    </tr>
-    <tr className="meta-row">
-        <td>عداد أول الشهر</td>
-        <td>${monthlyData.odometer_start}</td>
-        <td>عداد اخر الشهر</td>
-        <td>${monthlyData.odometer_end}</td>
-        <td>اجمالي المسافه</td>
-        <td>${monthlyData.distance_total}</td>
-        <td>اجمالي الجاز</td>
-        <td>${monthlyData.gas_total}</td>
-        <td>متوسط استهلاك الجاز \\ كم</td>
-        <td>${monthlyData.gas_per_km}</td>
-    </tr>
+      <td>اجمالي المسافه</td>
+      <td>${monthlyData.distance_total}</td>
+      <td>اجمالي المرتبات</td>
+      <td>${monthlyData.driver_salary_total}</td>
+      <td>اجمالي العهدة</td>
+      <td>${monthlyData.custody_total}</td>
+      <td>اجمالي المصروفات</td>
+      <td>${monthlyData.net_expenses_total}</td>
+      <td>اجمالي الايرادات</td>
+      <td>${monthlyData.net_revenue_total}</td>
+      <td>صافي السيارة</td>
+      <td>${monthlyData.net_car_total}</td>
+      <td>صافي السواق</td>
+      <td>${monthlyData.net_driver_total}</td>
+  </tr>
+  <tr className="meta-row">
+      <td>عداد أول الشهر</td>
+      <td>${monthlyData.odometer_start}</td>
+      <td>عداد اخر الشهر</td>
+      <td>${monthlyData.odometer_end}</td>
+      <td>اجمالي الجاز</td>
+      <td>${monthlyData.gas_total}</td>
+      <td>متوسط استهلاك الجاز \ كم</td>
+      <td>${monthlyData.gas_per_km}</td>
+      <td> إجمالي الايرادات الاضافية</td>
+      <td>${monthlyData.default_net_revenue_total}</td>
+      <td>الاهلاك</td>
+      <td>${monthlyData.perished_total}</td>
+  </tr>
     `);
   printWindow.document.write(`
     <!DOCTYPE html>
@@ -326,10 +379,10 @@ export const printCarMonthlyReport = (selectedCar, monthlyData) => {
           <table>
             <thead>
               <tr>
-                  <th>بداية الاسبوع</th>
-                  <th>نهاية الاسبوع</th>
-                  <th>بداية العداد</th>
-                  <th>نهاية العداد</th>
+                  <th colSpan="2">بداية الاسبوع</th>
+                  <th colSpan="2">نهاية الاسبوع</th>
+                  <th colSpan="2">بداية العداد</th>
+                  <th colSpan="2">نهاية العداد</th>
                   <th>اجمالي المسافه</th>
                   <th>راتب السائق</th>
                   <th>العهدة</th>
@@ -379,12 +432,12 @@ export const printMaintenanceReport = (
         <td>${parseFloat(entry.oil_change).toFixed(2)}</td>
         <td>${parseFloat(entry.price).toFixed(2)}</td>
         <td>${(
-          parseFloat(entry.air_filter) +
-          parseFloat(entry.oil_filter) +
-          parseFloat(entry.gas_filter) +
-          parseFloat(entry.oil_change) +
-          parseFloat(entry.price)
-        ).toFixed(2)}</td>
+        parseFloat(entry.air_filter) +
+        parseFloat(entry.oil_filter) +
+        parseFloat(entry.gas_filter) +
+        parseFloat(entry.oil_change) +
+        parseFloat(entry.price)
+      ).toFixed(2)}</td>
         <td>${entry.spare_part_type.slice(0, 20) || "-"}</td>
       </tr>
     `);
@@ -396,21 +449,21 @@ export const printMaintenanceReport = (
       <tr class="totals-row">
         <td>إجمالي الشهر</td>
         <td>${parseFloat(maintenanceData.monthly_totals.air_filter).toFixed(
-          2
-        )}</td>
+      2
+    )}</td>
         <td>${parseFloat(maintenanceData.monthly_totals.oil_filter).toFixed(
-          2
-        )}</td>
+      2
+    )}</td>
         <td>${parseFloat(maintenanceData.monthly_totals.gas_filter).toFixed(
-          2
-        )}</td>
+      2
+    )}</td>
         <td>${parseFloat(maintenanceData.monthly_totals.oil_change).toFixed(
-          2
-        )}</td>
+      2
+    )}</td>
         <td>${parseFloat(maintenanceData.monthly_totals.price).toFixed(2)}</td>
         <td>${parseFloat(maintenanceData.monthly_totals.full_total).toFixed(
-          2
-        )}</td>
+      2
+    )}</td>
         <td></td>
       </tr>
     `);
@@ -547,15 +600,15 @@ export const printMaintenanceReport = (
             <h2>تقرير الصيانة - ${monthYear.month} ${monthYear.year}</h2>
             <p>السيارة: ${selectedCar.car_model}</p>
             <p class="print-date">تاريخ الطباعة: ${new Date().toLocaleDateString(
-              "ar-EG",
-              {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-              }
-            )}</p>
+    "ar-EG",
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    }
+  )}</p>
           </div>
           
           <div class="summary-section">
@@ -565,38 +618,38 @@ export const printMaintenanceReport = (
                 <div class="summary-row">
                   <span>فلتر هواء:</span>
                   <span>${parseFloat(
-                    maintenanceData.monthly_totals.air_filter
-                  ).toFixed(2)}</span>
+    maintenanceData.monthly_totals.air_filter
+  ).toFixed(2)}</span>
                 </div>
                 <div class="summary-row">
                   <span>فلتر زيت:</span>
                   <span>${parseFloat(
-                    maintenanceData.monthly_totals.oil_filter
-                  ).toFixed(2)}</span>
+    maintenanceData.monthly_totals.oil_filter
+  ).toFixed(2)}</span>
                 </div>
                 <div class="summary-row">
                   <span>فلتر بنزين:</span>
                   <span>${parseFloat(
-                    maintenanceData.monthly_totals.gas_filter
-                  ).toFixed(2)}</span>
+    maintenanceData.monthly_totals.gas_filter
+  ).toFixed(2)}</span>
                 </div>
                 <div class="summary-row">
                   <span>تغيير زيت:</span>
                   <span>${parseFloat(
-                    maintenanceData.monthly_totals.oil_change
-                  ).toFixed(2)}</span>
+    maintenanceData.monthly_totals.oil_change
+  ).toFixed(2)}</span>
                 </div>
                 <div class="summary-row">
                   <span>سعر:</span>
                   <span>${parseFloat(
-                    maintenanceData.monthly_totals.price
-                  ).toFixed(2)}</span>
+    maintenanceData.monthly_totals.price
+  ).toFixed(2)}</span>
                 </div>
                 <div class="summary-row total">
                   <span>المجموع:</span>
                   <span>${parseFloat(
-                    maintenanceData.monthly_totals.full_total
-                  ).toFixed(2)}</span>
+    maintenanceData.monthly_totals.full_total
+  ).toFixed(2)}</span>
                 </div>
               </div>
             </div>
@@ -607,46 +660,45 @@ export const printMaintenanceReport = (
                 <div class="summary-row">
                   <span>فلتر هواء:</span>
                   <span>${parseFloat(
-                    maintenanceData.yearly_totals.air_filter
-                  ).toFixed(2)}</span>
+    maintenanceData.yearly_totals.air_filter
+  ).toFixed(2)}</span>
                 </div>
                 <div class="summary-row">
                   <span>فلتر زيت:</span>
                   <span>${parseFloat(
-                    maintenanceData.yearly_totals.oil_filter
-                  ).toFixed(2)}</span>
+    maintenanceData.yearly_totals.oil_filter
+  ).toFixed(2)}</span>
                 </div>
                 <div class="summary-row">
                   <span>فلتر بنزين:</span>
                   <span>${parseFloat(
-                    maintenanceData.yearly_totals.gas_filter
-                  ).toFixed(2)}</span>
+    maintenanceData.yearly_totals.gas_filter
+  ).toFixed(2)}</span>
                 </div>
                 <div class="summary-row">
                   <span>تغيير زيت:</span>
                   <span>${parseFloat(
-                    maintenanceData.yearly_totals.oil_change
-                  ).toFixed(2)}</span>
+    maintenanceData.yearly_totals.oil_change
+  ).toFixed(2)}</span>
                 </div>
                 <div class="summary-row">
                   <span>سعر:</span>
                   <span>${parseFloat(
-                    maintenanceData.yearly_totals.price
-                  ).toFixed(2)}</span>
+    maintenanceData.yearly_totals.price
+  ).toFixed(2)}</span>
                 </div>
                 <div class="summary-row total">
                   <span>المجموع:</span>
                   <span>${parseFloat(
-                    maintenanceData.yearly_totals.full_total
-                  ).toFixed(2)}</span>
+    maintenanceData.yearly_totals.full_total
+  ).toFixed(2)}</span>
                 </div>
               </div>
             </div>
           </div>
 
-          ${
-            maintenanceData.entries.length > 0
-              ? `
+          ${maintenanceData.entries.length > 0
+      ? `
             <table>
               <thead>
                 <tr>
@@ -665,12 +717,12 @@ export const printMaintenanceReport = (
               </tbody>
             </table>
           `
-              : `
+      : `
             <div class="empty-message">
               لا توجد سجلات صيانة لهذه الفترة
             </div>
           `
-          }
+    }
           
         </div>
         <script>
