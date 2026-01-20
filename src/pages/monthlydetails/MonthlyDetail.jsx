@@ -42,7 +42,7 @@ const MonthlyDetail = () => {
             setLoading(prev => ({ ...prev, cars: true }));
             setError(prev => ({ ...prev, cars: null }));
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/cars/');
+                const response = await axios.get('http://26.16.17.34:8000/api/cars/');
                 const carsData = response.data.map(car => ({
                     id: car.id,
                     model: car.car_model,
@@ -77,7 +77,7 @@ const MonthlyDetail = () => {
         setError(prev => ({ ...prev, monthlyData: null }));
 
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/monthly/detail/?car_id=${carId}&year=${year}&month=${month}`);
+            const response = await axios.get(`http://26.16.17.34:8000/api/monthly/detail/?car_id=${carId}&year=${year}&month=${month}`);
             const data = response.data;
             console.log(data)
             setMonthlyData(data);

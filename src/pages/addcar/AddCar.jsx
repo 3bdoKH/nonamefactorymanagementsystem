@@ -45,7 +45,7 @@ const AddCar = () => {
         setError(prev => ({ ...prev, delete: null }));
 
         try {
-            await axios.delete(`http://127.0.0.1:8000/api/cars/${id}/`);
+            await axios.delete(`http://26.16.17.34:8000/api/cars/${id}/`);
 
             setCars(prevCars => prevCars.filter(car => car.id !== id));
 
@@ -106,7 +106,7 @@ const AddCar = () => {
 
             if (isEditing && selectedCar) {
                 // Update existing car
-                response = await axios.put(`http://127.0.0.1:8000/api/cars/${selectedCar.id}/`, apiData)
+                response = await axios.put(`http://26.16.17.34:8000/api/cars/${selectedCar.id}/`, apiData)
                 console.log('Car updated successfully:', response.data)
 
                 // Update the car in the state
@@ -131,7 +131,7 @@ const AddCar = () => {
                 }, 3000)
             } else {
                 // Create new car
-                response = await axios.post('http://127.0.0.1:8000/api/cars/', apiData)
+                response = await axios.post('http://26.16.17.34:8000/api/cars/', apiData)
                 console.log('Car created successfully:', response.data)
 
                 // Add the new car to the state
@@ -177,7 +177,7 @@ const AddCar = () => {
             setError(prev => ({ ...prev, cars: null }));
 
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/cars/');
+                const response = await axios.get('http://26.16.17.34:8000/api/cars/');
 
                 const carsData = response.data.map(car => ({
                     id: car.id,

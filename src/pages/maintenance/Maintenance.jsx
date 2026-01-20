@@ -23,7 +23,7 @@ const Maintenance = () => {
       setLoading(true);
       // Check if the API server is available first
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/cars/');
+        const response = await fetch('http://26.16.17.34:8000/api/cars/');
 
         // Check if we got HTML instead of JSON (common when server returns error page)
         const contentType = response.headers.get("content-type");
@@ -59,7 +59,7 @@ const Maintenance = () => {
     try {
       setLoading(true);
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/maintenance/month/?car_id=${selectedCar}&year=${year}&month=${month}`);
+        const response = await fetch(`http://26.16.17.34:8000/api/maintenance/month/?car_id=${selectedCar}&year=${year}&month=${month}`);
 
         // Check if we got HTML instead of JSON
         const contentType = response.headers.get("content-type");

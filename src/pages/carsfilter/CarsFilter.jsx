@@ -68,7 +68,7 @@ const CarsFilter = () => {
             setError(prev => ({ ...prev, cars: null }));
 
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/cars/');
+                const response = await axios.get('http://26.16.17.34:8000/api/cars/');
 
                 const carsData = response.data.map(car => ({
                     id: car.id,
@@ -107,7 +107,7 @@ const CarsFilter = () => {
         setError(prev => ({ ...prev, weeklyData: null }));
 
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/weekly/detail/?car_id=${carId}&date=${date}`);
+            const response = await axios.get(`http://26.16.17.34:8000/api/weekly/detail/?car_id=${carId}&date=${date}`);
             const data = response.data;
             // Calculate the dates for the current week (Saturday to Thursday)
             const currentDate = new Date(date);
@@ -349,10 +349,10 @@ const CarsFilter = () => {
                 without: parseFloat(day.without) || 0
             };
             try {
-                await axios.put('http://127.0.0.1:8000/api/daily-entries/by-date/', apiData);
+                await axios.put('http://26.16.17.34:8000/api/daily-entries/by-date/', apiData);
             } catch (updateError) {
                 if (updateError.response && updateError.response.status === 404) {
-                    await axios.post('http://127.0.0.1:8000/api/daily-entries/', apiData);
+                    await axios.post('http://26.16.17.34:8000/api/daily-entries/', apiData);
                 } else {
                     throw updateError;
                 }
@@ -405,7 +405,7 @@ const CarsFilter = () => {
                 net_car: parseFloat(weeklyData.net_car) || 0,
                 perished: parseFloat(weeklyData.perished) || 0,
             };
-            await axios.post('http://127.0.0.1:8000/api/weekly/', apiData);
+            await axios.post('http://26.16.17.34:8000/api/weekly/', apiData);
             alert('تم حفظ ملخص الأسبوع بنجاح');
         } catch (err) {
             const errorDetail = err.response?.data ? JSON.stringify(err.response.data) : 'No detailed error information';
@@ -499,7 +499,7 @@ const CarsFilter = () => {
                         net_car: 0,
                         perished: 0,
                     };
-                    await axios.put('http://127.0.0.1:8000/api/daily-entries/by-date/', apiData);
+                    await axios.put('http://26.16.17.34:8000/api/daily-entries/by-date/', apiData);
                 } catch (err) {
                     console.error(`Error clearing data for ${day.inspection_date}:`, err);
                 }
@@ -520,7 +520,7 @@ const CarsFilter = () => {
                         perished: 0,
                     };
 
-                    await axios.put('http://127.0.0.1:8000/api/weekly/by-date/', weeklyApiData);
+                    await axios.put('http://26.16.17.34:8000/api/weekly/by-date/', weeklyApiData);
                 } catch (err) {
                     console.error('Error clearing weekly summary:', err);
                 }
