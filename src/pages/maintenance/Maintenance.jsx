@@ -272,7 +272,7 @@ const Maintenance = () => {
       };
 
       try {
-        const fullUrl = url.startsWith('http') ? url : `http://127.0.0.1:8000${url}`;
+        const fullUrl = url.startsWith('http') ? url : `http://26.16.17.34:8000${url}`;
         const response = await fetch(fullUrl, {
           method,
           headers: {

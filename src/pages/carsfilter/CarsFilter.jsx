@@ -49,15 +49,16 @@ const CarsFilter = () => {
             tires: 0,
             balance: 0,
             washing: 0,
-            without: 0
+            without: 0,
+            driver_expenses: 0
         },
         daily_entries: [
-            { day_name: 'السبت', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-            { day_name: 'الأحد', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-            { day_name: 'الاثنين', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-            { day_name: 'الثلاثاء', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-            { day_name: 'الأربعاء', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
-            { day_name: 'الخميس', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '' },
+            { day_name: 'السبت', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '', driver_expenses: '' },
+            { day_name: 'الأحد', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '', driver_expenses: '' },
+            { day_name: 'الاثنين', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '', driver_expenses: '' },
+            { day_name: 'الثلاثاء', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '', driver_expenses: '' },
+            { day_name: 'الأربعاء', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '', driver_expenses: '' },
+            { day_name: 'الخميس', inspection_date: '', driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: '', driver_expenses: '' },
         ]
     });
 
@@ -131,12 +132,12 @@ const CarsFilter = () => {
 
             // Prepare daily entries with dates pre-filled
             const dailyEntries = [
-                { day_name: 'السبت', inspection_date: weekDates[0], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
-                { day_name: 'الأحد', inspection_date: weekDates[1], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
-                { day_name: 'الاثنين', inspection_date: weekDates[2], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
-                { day_name: 'الثلاثاء', inspection_date: weekDates[3], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
-                { day_name: 'الأربعاء', inspection_date: weekDates[4], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
-                { day_name: 'الخميس', inspection_date: weekDates[5], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                { day_name: 'السبت', inspection_date: weekDates[0], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
+                { day_name: 'الأحد', inspection_date: weekDates[1], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
+                { day_name: 'الاثنين', inspection_date: weekDates[2], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
+                { day_name: 'الثلاثاء', inspection_date: weekDates[3], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
+                { day_name: 'الأربعاء', inspection_date: weekDates[4], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
+                { day_name: 'الخميس', inspection_date: weekDates[5], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
             ];
 
             const newWeeklyData = {
@@ -169,7 +170,8 @@ const CarsFilter = () => {
                     tires: data.totals.tires || 0,
                     balance: data.totals.balance || 0,
                     washing: data.totals.washing || 0,
-                    without: data.totals.without || 0
+                    without: data.totals.without || 0,
+                    driver_expenses: data.totals.driver_expenses || 0
                 },
                 daily_entries: dailyEntries,
             };
@@ -204,7 +206,8 @@ const CarsFilter = () => {
                             balance: entry.balance || '',
                             washing: entry.washing || '',
                             without: entry.without || '',
-                            week_start: entry.week_start || ''
+                            week_start: entry.week_start || '',
+                            driver_expenses: entry.driver_expenses || ''
                         };
                     }
                 });
@@ -240,12 +243,12 @@ const CarsFilter = () => {
 
             // Prepare daily entries with dates pre-filled
             const dailyEntries = [
-                { day_name: 'السبت', inspection_date: weekDates[0], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
-                { day_name: 'الأحد', inspection_date: weekDates[1], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
-                { day_name: 'الاثنين', inspection_date: weekDates[2], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
-                { day_name: 'الثلاثاء', inspection_date: weekDates[3], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
-                { day_name: 'الأربعاء', inspection_date: weekDates[4], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
-                { day_name: 'الخميس', inspection_date: weekDates[5], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                { day_name: 'السبت', inspection_date: weekDates[0], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
+                { day_name: 'الأحد', inspection_date: weekDates[1], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
+                { day_name: 'الاثنين', inspection_date: weekDates[2], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
+                { day_name: 'الثلاثاء', inspection_date: weekDates[3], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
+                { day_name: 'الأربعاء', inspection_date: weekDates[4], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
+                { day_name: 'الخميس', inspection_date: weekDates[5], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
             ];
 
             setWeeklyData({
@@ -278,7 +281,8 @@ const CarsFilter = () => {
                     tires: 0,
                     balance: 0,
                     washing: 0,
-                    without: 0
+                    without: 0,
+                    driver_expenses: 0
                 },
                 daily_entries: dailyEntries
             });
@@ -346,7 +350,8 @@ const CarsFilter = () => {
                 tires: parseFloat(day.tires) || 0,
                 balance: parseFloat(day.balance) || 0,
                 washing: parseFloat(day.washing) || 0,
-                without: parseFloat(day.without) || 0
+                without: parseFloat(day.without) || 0,
+                driver_expenses: parseFloat(day.driver_expenses) || 0
             };
             try {
                 await axios.put('http://26.16.17.34:8000/api/daily-entries/by-date/', apiData);
@@ -498,6 +503,7 @@ const CarsFilter = () => {
                         net_driver: 0,
                         net_car: 0,
                         perished: 0,
+                        driver_expenses: 0
                     };
                     await axios.put('http://26.16.17.34:8000/api/daily-entries/by-date/', apiData);
                 } catch (err) {
@@ -579,14 +585,15 @@ const CarsFilter = () => {
                     net_driver: 0,
                     net_car: 0,
                     perished: 0,
+                    driver_expenses: 0
                 },
                 daily_entries: [
-                    { day_name: 'السبت', inspection_date: weekDates[0], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
-                    { day_name: 'الأحد', inspection_date: weekDates[1], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
-                    { day_name: 'الاثنين', inspection_date: weekDates[2], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
-                    { day_name: 'الثلاثاء', inspection_date: weekDates[3], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
-                    { day_name: 'الأربعاء', inspection_date: weekDates[4], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
-                    { day_name: 'الخميس', inspection_date: weekDates[5], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0] },
+                    { day_name: 'السبت', inspection_date: weekDates[0], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
+                    { day_name: 'الأحد', inspection_date: weekDates[1], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
+                    { day_name: 'الاثنين', inspection_date: weekDates[2], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
+                    { day_name: 'الثلاثاء', inspection_date: weekDates[3], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
+                    { day_name: 'الأربعاء', inspection_date: weekDates[4], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
+                    { day_name: 'الخميس', inspection_date: weekDates[5], driver_name: '', area: '', freight: '', default_freight: '', gas: '', oil: '', card: '', fines: '', tips: '', maintenance: '', spare_parts: '', tires: '', balance: '', washing: '', without: '', week_start: weekDates[0], driver_expenses: '' },
                 ]
             });
 
@@ -672,7 +679,7 @@ const CarsFilter = () => {
                                         <tr>
                                             <th>اليوم</th>
                                             <th>التاريخ</th>
-                                            <th className="driver-name" style={{ padding: '10px 50px' }}>السواق</th>
+                                            <th className="driver-name" style={{ padding: '10px 20px' }}>السواق</th>
                                             <th className="area-name" style={{ padding: '10px 50px' }}>المنطقه</th>
                                             <th>النولون</th>
                                             <th>النولون الاضافي</th>
@@ -687,6 +694,7 @@ const CarsFilter = () => {
                                             <th>غسيل</th>
                                             <th>بدون</th>
                                             <th>صيانه</th>
+                                            <th>مصاريف السائق</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -709,6 +717,7 @@ const CarsFilter = () => {
                                                 <td><input type="number" value={day.washing === "0.00" ? '' : day.washing.split('.')[0]} onChange={(e) => handleInputChange(index, 'washing', e.target.value)} /></td>
                                                 <td><input type="number" value={day.without === "0.00" ? '' : day.without.split('.')[0]} onChange={(e) => handleInputChange(index, 'without', e.target.value)} /></td>
                                                 <td><input type="number" value={day.maintenance === "0.00" ? '' : day.maintenance.split('.')[0]} onChange={(e) => handleInputChange(index, 'maintenance', e.target.value)} /></td>
+                                                <td><input type="number" value={day.driver_expenses === "0.00" ? '' : day.driver_expenses.split('.')[0]} onChange={(e) => handleInputChange(index, 'driver_expenses', e.target.value)} /></td>
                                             </tr>
                                         ))}
 
@@ -727,6 +736,7 @@ const CarsFilter = () => {
                                             <td>{weeklyData.totals.washing}</td>
                                             <td>{weeklyData.totals.without}</td>
                                             <td>{weeklyData.totals.maintenance}</td>
+                                            <td>{weeklyData.totals.driver_expenses}</td>
                                         </tr>
 
                                         <tr className="meta-row">
@@ -736,7 +746,7 @@ const CarsFilter = () => {
                                             <td colSpan="2"><input type="number" value={weeklyData.driver_salary === "0.00" ? '' : parseFloat(weeklyData.driver_salary).toFixed(0)} onChange={(e) => handleMetadataChange('driver_salary', e.target.value)} /></td>
                                             <td colSpan="2">العهدة</td>
                                             <td colSpan="2"><input type="number" value={weeklyData.custody === "0.00" ? '' : parseFloat(weeklyData.custody).toFixed(0)} onChange={(e) => handleMetadataChange('custody', e.target.value)} /></td>
-                                            <td colSpan="2">إجمالي الإيرادات</td>
+                                            <td colSpan="3">إجمالي الإيرادات</td>
                                             <td colSpan="3">{parseFloat(weeklyData.net_revenue).toFixed(0)}</td>
                                         </tr>
 
@@ -754,7 +764,7 @@ const CarsFilter = () => {
                                             <td colSpan="2">
                                                 {parseFloat(weeklyData.net_expenses).toFixed(0)}
                                             </td>
-                                            <td colSpan="2"> اجمالي الايرادات الاضافية</td>
+                                            <td colSpan="3"> اجمالي الايرادات الاضافية</td>
                                             <td colSpan="3">
                                                 {parseFloat(weeklyData.default_net_revenue).toFixed(0)}
                                             </td>
@@ -770,14 +780,14 @@ const CarsFilter = () => {
                                                 {parseFloat(weeklyData.net_car).toFixed(0)}
                                             </td>
                                             <td colSpan="2">الاهلاك</td>
-                                            <td colSpan="7">
+                                            <td colSpan="8">
                                                 <input type="number" value={weeklyData.perished === 0 ? '' : parseFloat(weeklyData.perished).toFixed(0)} onChange={(e) => handleMetadataChange('perished', e.target.value)} />
                                             </td>
                                         </tr>
 
                                         <tr className="meta-row">
                                             <td colSpan="2">ملاحظات</td>
-                                            <td colSpan="15">
+                                            <td colSpan="16">
                                                 <textarea
                                                     value={weeklyData.description || ''}
                                                     onChange={(e) => handleMetadataChange('description', e.target.value)}

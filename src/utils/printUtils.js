@@ -21,6 +21,7 @@ export const printCarWeeklyReport = (selectedCar, weeklyData) => {
                 <td>${day.balance}</td>
                 <td>${day.washing}</td>
                 <td>${day.without}</td>
+                <td>${day.driver_expenses}</td>
             </tr>
         `);
   });
@@ -42,6 +43,7 @@ export const printCarWeeklyReport = (selectedCar, weeklyData) => {
             <td>${totals.balance}</td>
             <td>${totals.washing}</td>
             <td>${totals.without}</td>
+            <td>${totals.driver_expenses}</td>
         </tr>
     `);
 
@@ -191,6 +193,7 @@ export const printCarWeeklyReport = (selectedCar, weeklyData) => {
                                 <th>ميزان</th>
                                 <th>غسيل</th>
                                 <th>بدون</th>
+                                <th>مصروفات السائق</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -253,6 +256,7 @@ export const printCarMonthlyReport = (selectedCar, monthlyData) => {
         <th>غسيل</th>
         <th>بدون</th>
         <th>صيانه</th>
+        <th>مصروفات السائق</th>
     </tr>
     <tr className="daily-totals">
         <td>${monthlyData.daily_totals.freight}</td>
@@ -268,9 +272,10 @@ export const printCarMonthlyReport = (selectedCar, monthlyData) => {
         <td>${monthlyData.daily_totals.washing}</td>
         <td>${monthlyData.daily_totals.without}</td>
         <td>${monthlyData.daily_totals.maintenance}</td>
+        <td>${monthlyData.daily_totals.driver_expenses}</td>
     </tr>
     <tr className='totals-row'>
-        <td colSpan="14">الإجمالي</td>
+        <td colSpan="15">الإجمالي</td>
     </tr>
     <tr className="meta-row">
       <td>اجمالي المسافه</td>

@@ -164,8 +164,7 @@ const MonthlyDetail = () => {
                                             <th>العهدة</th>
                                             <th>اجمالي المصروفات</th>
                                             <th>اجمالي الايرادات</th>
-                                            <th>اجمالي الايرادات الاضافية</th>
-                                            <th></th>
+                                            <th colSpan={2}>اجمالي الايرادات الاضافية</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -180,11 +179,11 @@ const MonthlyDetail = () => {
                                                 <td>{week.custody}</td>
                                                 <td>{week.net_expenses}</td>
                                                 <td>{week.net_revenue}</td>
-                                                <td>{week.default_net_revenue}</td>
+                                                <td colSpan={2} >{week.default_net_revenue}</td>
                                             </tr>
                                         ))}
                                         <tr className='totals-row'>
-                                            <td colSpan="14">الإجماليات</td>
+                                            <td colSpan="15">الإجماليات</td>
                                         </tr>
                                         <tr className="daily-totals-head">
                                             <th>النولون</th>
@@ -200,6 +199,7 @@ const MonthlyDetail = () => {
                                             <th>غسيل</th>
                                             <th>بدون</th>
                                             <th>صيانه</th>
+                                            <th>مصروفات السائق</th>
                                         </tr>
                                         <tr className="daily-totals">
                                             <td>{monthlyData.daily_totals.freight}</td>
@@ -215,9 +215,10 @@ const MonthlyDetail = () => {
                                             <td>{monthlyData.daily_totals.washing}</td>
                                             <td>{monthlyData.daily_totals.without}</td>
                                             <td>{monthlyData.daily_totals.maintenance}</td>
+                                            <td>{monthlyData.daily_totals.driver_expenses}</td>
                                         </tr>
                                         <tr className='totals-row'>
-                                            <td colSpan="14">الإجمالي</td>
+                                            <td colSpan="15">الإجمالي</td>
                                         </tr>
                                         <tr className="meta-row">
                                             <td>اجمالي المسافه</td>
@@ -233,7 +234,7 @@ const MonthlyDetail = () => {
                                             <td>صافي السيارة</td>
                                             <td>{monthlyData.net_car_total}</td>
                                             <td>صافي السواق</td>
-                                            <td>{monthlyData.net_driver_total}</td>
+                                            <td colSpan={2}>{monthlyData.net_driver_total}</td>
                                         </tr>
                                         <tr className="meta-row">
                                             <td>عداد أول الشهر</td>
